@@ -34,7 +34,7 @@ export class RecipeService {
     ),
   ];
 
-  getRecipe() {
+  getRecipes() {
     return this.recipes.slice();
   }
 
@@ -42,5 +42,8 @@ export class RecipeService {
     this.slService.addIngredients(ingredients)
   }
 
+  getRecipe(index: number){
+    return this.recipes[index]
+  }
   constructor(private slService: ShoppingListService){}
 }
