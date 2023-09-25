@@ -4,25 +4,32 @@ import { Subject } from "rxjs";
 
 export class ShoppingListService {
   ingredentsChanged = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>();
   ingredients: Ingredient[] = [
     new Ingredient('apple', 10),
     new Ingredient('orange', 5),
   ];
 
-  getIngredients(){
+  getIngredients() {
     return this.ingredients.slice();
   }
-
-  addIngredient(ingredient: Ingredient){
+  getIngredient(index: number) {
+    return this.ingredients[index];
+  }
+  addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
     this.ingredentsChanged.next(this.ingredients.slice());
   }
 
-  addIngredients(ingredients: Ingredient[]){
+  addIngredients(ingredients: Ingredient[]) {
     // for(let ingredient of ingredients){
     //   this.addIngredient(ingredient)
     // }
-    this.ingredients.push(...ingredients)
-    this.ingredentsChanged.next(this.ingredients.slice())
+    this.ingredients.push(...ingredients);
+    this.ingredentsChanged.next(this.ingredients.slice());
+  }
+  updateIngredient(index: number, newIngredient: Ingredient) {
+    this.ingredients[index] = newIngredient;
+    this.ingredentsChanged.next(this.ingredients.slice());
   }
 }
