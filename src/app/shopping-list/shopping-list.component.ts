@@ -10,7 +10,13 @@ import { Subscription } from 'rxjs';
 })
 export class ShoppingListComponent implements OnInit,OnDestroy {
   ingredients!: Ingredient[];
-  private igChangeSub!: Subscription
+  private igChangeSub!: Subscription;
+
+  onEditItem(index: number){
+    this.slService.startedEditing.next(index);
+  }
+
+  
   ngOnInit(): void {
     this.ingredients = this.slService.getIngredients();
     this.igChangeSub = this.slService.ingredentsChanged.subscribe((ingredients: Ingredient[])=>{
